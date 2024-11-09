@@ -57,20 +57,19 @@ class LinkedList {
     }
 
     void remove(int index){
-      Node *temp = head;
 
         // For either deleting the head of a linked list or not
         if(index == 0 && size > 0){
           head = head->next;
         }else{
           // Get node before the one we want to remove
-          Node prev = *get(index - 1);
+          Node *prev = get(index - 1);
 
           // Create pointer to the current node
-          Node *current = prev.next;
+          Node *current = prev->next;
 
-          // Assign the
-          prev.next = (prev.next)->next;
+          // Assign the previous node to the node after the one we're removing
+          prev->next = current->next;
         }
         
         size--;
@@ -119,6 +118,10 @@ class LinkedList {
       s += "]";
       return s;
     }
+
+    int getSize(){
+      return size;
+    }
 };
 
 int main() {
@@ -128,7 +131,11 @@ int main() {
   ll.add(10);
   ll.add(15);
 
-  ll.remove(1);
+  cout << ll.to_string();
+
+  ll.remove(ll.getSize() - 1);
+  ll.remove(ll.getSize() - 1);
+  ll.remove(ll.getSize() - 1);
 
   cout << ll.to_string();
 } 
